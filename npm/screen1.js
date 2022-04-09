@@ -1,4 +1,7 @@
 const yargs = require('yargs')
+const backend = require('./backend')
+
+yargs.version('1.1.0')
 
 
 yargs.command({
@@ -17,9 +20,9 @@ yargs.command({
             type: 'string',
         }
     },
-    handler: function() {
-        console.log("title:", argv.title)
-        console.log("body:", argv.body)
+    handler: function(argv) {
+        backend.addnotes(argv.title, argv.body)
+            // console.log('added notes')
     }
 
 })
