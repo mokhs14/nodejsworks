@@ -1,58 +1,63 @@
+const chalk = require('chalk')
 const yargs = require('yargs')
-const backend = require('./backend')
+const backend = require('./backend.js')
 
+// Customize yargs version
 yargs.version('1.1.0')
 
-
+// Create add command
 yargs.command({
-    command: "add",
-    description: "adds the note",
+    command: 'add',
+    describe: 'Add a new note',
     builder: {
-
         title: {
-            title: "note title",
+            describe: 'Note title',
             demandOption: true,
-            type: 'string',
+            type: 'string'
         },
         body: {
-            title: "body of the note",
+            describe: 'Note body',
             demandOption: true,
-            type: 'string',
+            type: 'string'
         }
     },
     handler: function(argv) {
-        backend.addnotes(argv.title, argv.body)
-            // console.log('added notes')
+        backend.addNote(argv.title, argv.body)
     }
-
 })
 
+// Create remove command
 yargs.command({
-    command: "remove",
-    description: "removes the note",
-    handler: function() {
-        console.log("removed your note!!")
-    }
-
-})
-
-yargs.command({
-    command: "read",
-    description: "reads the note",
-    handler: function() {
-        console.log("your notes are read!!")
-    }
-
-})
-
-yargs.command({
-    command: "list",
-    description: "lists the note",
-
+    command: 'remove',
+    describe: 'Remove a note',
+    builder: {
+        title: {
+            describe: 'title of the note to be removed',
+            demandOption: true,
+            type: 'string'
+        }
+    },
     handler: function(argv) {
-        console.log("this is your list")
+        backend.removeNote(argv.title)
     }
+})
 
+// Create list command
+yargs.command({
+    command: 'list',
+    describe: 'List your notes',
+    handler: function() {
+        console.log('Listing out all notes')
+    }
+})
+
+// Create read command
+yargs.command({
+    command: 'read',
+    describe: 'Read a note',
+    handler: function() {
+        console.log('Reading a note')
+    }
 })
 
 yargs.parse()
