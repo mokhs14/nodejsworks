@@ -11,6 +11,8 @@ const addNote = function(title, body) {
         return note.title === title
     })
 
+    debugger
+
     if (duplicateNotes.length === 0) {
         notes.push({
             title: title,
@@ -39,7 +41,7 @@ const removeNote = function(title) {
 
 const saveNotes = function(notes) {
     const dataJSON = JSON.stringify(notes)
-    fs.writeFileSync('notes.json', dataJSON)
+    fs.writeFileSync('notes.json', dataJsON)
 }
 
 const loadNotes = function() {
